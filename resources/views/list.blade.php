@@ -2,31 +2,32 @@
 @section('content')
 <div class="container">
     <div class="row">
-         {!! Form::open(['route' => 'cargo/search', 'method' => 'post', 'novalidate', 'class' => 'form-inline']) !!}
+         {!! Form::open(['route' => 'concepto/search', 'method' => 'post', 'novalidate', 'class' => 'form-inline']) !!}
           <div class="form-group">
-            <label for="exampleInputName2">Nombre</label>
-            <input type="text" class="form-control" name = "nombre" >
+            <label for="exampleInputName2">tipo</label>
+            <input type="text" class="form-control" name = "tipo" >
           </div>
           <button type="submit" class="btn btn-default">Search</button>
-        <a href="{{ route('cargo.index') }}" class="btn btn-primary">All</a>
-         <a href="{{ route('cargo.create') }}" class="btn btn-primary">Create</a>
+        <a href="{{ route('concepto.index') }}" class="btn btn-primary">All</a>
+         <a href="{{ route('concepto.create') }}" class="btn btn-primary">Create</a>
         {!! Form::close() !!}
         <br>
 		<table class="table table-condensed table-striped table-bordered">
             <thead>
                 <tr>
-                  <th>Nombre</th>             
-                  <th>Action</th>
+                  <th>tipo</th>             
+                  <th>descripcion</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($cargos as $cargo)
+                @foreach($conceptos as $concepto)
                 <tr>
-                    <td>{{ $cargo->nombre }}</td>
-                    <td>{{ $cargo->fechaCreacion }}</td>
+                    <td>{{ $concepto->tipo }}</td>
+                    <td>{{ $concepto->descripcion }}</td>
+                    <td>{{ $concepto->fechaCreacion }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs" href="{{ route('cargo.edit',['cod_cargo' => $cargo->cod_cargo] )}}" >Edit</a> 
-                        <a class="btn btn-danger btn-xs" href="{{ route('cargo/destroy',['cod_cargo' => $cargo->cod_cargo] )}}" >Delete</a>
+                        <a class="btn btn-primary btn-xs" href="{{ route('concepto.edit',['id' => $concepto->id] )}}" >Edit</a> 
+                        <a class="btn btn-danger btn-xs" href="{{ route('concepto/destroy',['id' => $concepto->id] )}}" >Delete</a>
                     </td>
                 </tr>
                 @endforeach
