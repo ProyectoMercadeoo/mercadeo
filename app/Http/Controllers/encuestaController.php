@@ -4,9 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\concepto as concepto;
+use App\Models\encuesta as encuesta;
 
-class conceptoController extends Controller {
+class encuestaController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,8 @@ class conceptoController extends Controller {
 	public function index()
 	{
 		//
-		$conceptos = concepto::all();
-		return \View::make('concepto/concepto_list',compact('conceptos')); 
+		$encuestas = encuesta::all();
+		return \View::make('encuesta/encuesta_list',compact('encuestas')); 
 	}
 
 	/**
@@ -28,7 +28,7 @@ class conceptoController extends Controller {
 	public function create()
 	{
 		//
-		return \View::make('concepto/concepto_new');
+		return \View::make('encuesta/encuesta_new');
 
 	}
 
@@ -40,9 +40,9 @@ class conceptoController extends Controller {
 	public function store(request $request)
 	{
 		//
-		$concepto = new concepto; 
-		$concepto->create($request->all());
-		return redirect ('concepto');
+		$encuesta = new encuesta; 
+		$encuesta->create($request->all());
+		return redirect ('encuesta');
 	}
 
 	/**
@@ -65,8 +65,8 @@ class conceptoController extends Controller {
 	public function edit($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		return \View::make('concepto/concepto_update',compact ('concepto'));
+		$encuesta = encuesta::find($id);
+		return \View::make('encuesta/encuesta_update',compact ('encuesta'));
 	}
 
 	/**
@@ -78,11 +78,11 @@ class conceptoController extends Controller {
 	public function update(request $request)
 	{
 		//
-		$concepto = concepto::find($request->id); 
-		$concepto->tipo = $request->tipo; 
-		$concepto->descripcion = $request->descripcion; 
-		$concepto->save(); 
-		return redirect('concepto'); 
+		$encuesta = encuesta::find($request->id); 
+		$encuesta->fecha_encuesta = $request->fecha_encuesta; 
+		$encuesta->instrucciones = $request->instrucciones; 
+		$encuesta->save(); 
+		return redirect('encuesta'); 
 	}
 
 	/**
@@ -94,15 +94,15 @@ class conceptoController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		$concepto->delete();
+		$encuesta = encuesta::find($id);
+		$encuesta->delete();
 		return redirect()->back();    
 
 	}
 	public function search (Request $request)
 	{
-		$conceptos = concepto::where('tipo','like','%'. $request->tipo.'%')->get();
-		return \View::make('concepto/concepto_list', compact('conceptos'));
+		$encuestas = encuesta::where('fecha_encuesta','like','%'. $request->fecha_encuesta.'%')->get();
+		return \View::make('encuesta/encuesta_list', compact('encuestas'));
 	}
 
 }

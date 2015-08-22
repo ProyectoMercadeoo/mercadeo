@@ -4,9 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\concepto as concepto;
+use App\Models\pregunta as pregunta;
 
-class conceptoController extends Controller {
+class preguntaController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,8 @@ class conceptoController extends Controller {
 	public function index()
 	{
 		//
-		$conceptos = concepto::all();
-		return \View::make('concepto/concepto_list',compact('conceptos')); 
+		$preguntas = pregunta::all();
+		return \View::make('pregunta/pregunta_list',compact('preguntas')); 
 	}
 
 	/**
@@ -28,7 +28,7 @@ class conceptoController extends Controller {
 	public function create()
 	{
 		//
-		return \View::make('concepto/concepto_new');
+		return \View::make('pregunta/pregunta_new');
 
 	}
 
@@ -40,9 +40,9 @@ class conceptoController extends Controller {
 	public function store(request $request)
 	{
 		//
-		$concepto = new concepto; 
-		$concepto->create($request->all());
-		return redirect ('concepto');
+		$pregunta = new pregunta; 
+		$pregunta->create($request->all());
+		return redirect ('pregunta');
 	}
 
 	/**
@@ -65,8 +65,8 @@ class conceptoController extends Controller {
 	public function edit($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		return \View::make('concepto/concepto_update',compact ('concepto'));
+		$pregunta = pregunta::find($id);
+		return \View::make('pregunta/pregunta_update',compact ('pregunta'));
 	}
 
 	/**
@@ -78,11 +78,10 @@ class conceptoController extends Controller {
 	public function update(request $request)
 	{
 		//
-		$concepto = concepto::find($request->id); 
-		$concepto->tipo = $request->tipo; 
-		$concepto->descripcion = $request->descripcion; 
-		$concepto->save(); 
-		return redirect('concepto'); 
+		$pregunta = pregunta::find($request->id); 
+		$pregunta->pregunta = $request->pregunta;  
+		$pregunta->save(); 
+		return redirect('pregunta'); 
 	}
 
 	/**
@@ -94,15 +93,15 @@ class conceptoController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		$concepto->delete();
+		$pregunta = pregunta::find($id);
+		$pregunta->delete();
 		return redirect()->back();    
 
 	}
 	public function search (Request $request)
 	{
-		$conceptos = concepto::where('tipo','like','%'. $request->tipo.'%')->get();
-		return \View::make('concepto/concepto_list', compact('conceptos'));
+		$preguntas = pregunta::where('pregunta','like','%'. $request->pregunta.'%')->get();
+		return \View::make('pregunta/pregunta_list', compact('preguntas'));
 	}
 
 }

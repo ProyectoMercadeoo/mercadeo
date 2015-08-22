@@ -4,9 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\concepto as concepto;
+use App\Models\entorno as entorno;
 
-class conceptoController extends Controller {
+class entornoController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,8 @@ class conceptoController extends Controller {
 	public function index()
 	{
 		//
-		$conceptos = concepto::all();
-		return \View::make('concepto/concepto_list',compact('conceptos')); 
+		$entornos = entorno::all();
+		return \View::make('entorno/entorno_list',compact('entornos')); 
 	}
 
 	/**
@@ -28,7 +28,7 @@ class conceptoController extends Controller {
 	public function create()
 	{
 		//
-		return \View::make('concepto/concepto_new');
+		return \View::make('entorno/entorno_new');
 
 	}
 
@@ -40,9 +40,9 @@ class conceptoController extends Controller {
 	public function store(request $request)
 	{
 		//
-		$concepto = new concepto; 
-		$concepto->create($request->all());
-		return redirect ('concepto');
+		$entorno = new entorno; 
+		$entorno->create($request->all());
+		return redirect ('entorno');
 	}
 
 	/**
@@ -65,8 +65,8 @@ class conceptoController extends Controller {
 	public function edit($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		return \View::make('concepto/concepto_update',compact ('concepto'));
+		$entorno = entorno::find($id);
+		return \View::make('entorno/entorno_update',compact ('entorno'));
 	}
 
 	/**
@@ -78,11 +78,10 @@ class conceptoController extends Controller {
 	public function update(request $request)
 	{
 		//
-		$concepto = concepto::find($request->id); 
-		$concepto->tipo = $request->tipo; 
-		$concepto->descripcion = $request->descripcion; 
-		$concepto->save(); 
-		return redirect('concepto'); 
+		$entorno = entorno::find($request->id); 
+		$entorno->tipo_entorno= $request->tipo_entorno; 
+		$entorno->save(); 
+		return redirect('entorno'); 
 	}
 
 	/**
@@ -94,15 +93,15 @@ class conceptoController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		$concepto->delete();
+		$entorno = entorno::find($id);
+		$entorno->delete();
 		return redirect()->back();    
 
 	}
 	public function search (Request $request)
 	{
-		$conceptos = concepto::where('tipo','like','%'. $request->tipo.'%')->get();
-		return \View::make('concepto/concepto_list', compact('conceptos'));
+		$entornos = entorno::where('tipo_entorno','like','%'. $request->tipo_entorno.'%')->get();
+		return \View::make('entorno/entorno_list', compact('entornos'));
 	}
 
 }

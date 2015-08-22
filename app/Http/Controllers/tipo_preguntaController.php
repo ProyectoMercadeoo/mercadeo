@@ -4,9 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\concepto as concepto;
+use App\Models\tipo_pregunta as tipo_pregunta;
 
-class conceptoController extends Controller {
+class tipo_preguntaController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,8 @@ class conceptoController extends Controller {
 	public function index()
 	{
 		//
-		$conceptos = concepto::all();
-		return \View::make('concepto/concepto_list',compact('conceptos')); 
+		$tipo_preguntas = tipo_pregunta::all();
+		return \View::make('tipo_pregunta/tipo_pregunta_list',compact('tipo_preguntas')); 
 	}
 
 	/**
@@ -28,7 +28,7 @@ class conceptoController extends Controller {
 	public function create()
 	{
 		//
-		return \View::make('concepto/concepto_new');
+		return \View::make('tipo_pregunta/tipo_pregunta_new');
 
 	}
 
@@ -40,9 +40,9 @@ class conceptoController extends Controller {
 	public function store(request $request)
 	{
 		//
-		$concepto = new concepto; 
-		$concepto->create($request->all());
-		return redirect ('concepto');
+		$tipo_pregunta = new tipo_pregunta; 
+		$tipo_pregunta->create($request->all());
+		return redirect ('tipo_pregunta');
 	}
 
 	/**
@@ -65,8 +65,8 @@ class conceptoController extends Controller {
 	public function edit($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		return \View::make('concepto/concepto_update',compact ('concepto'));
+		$tipo_pregunta = tipo_pregunta::find($id);
+		return \View::make('tipo_pregunta/tipo_pregunta_update',compact ('tipo_pregunta'));
 	}
 
 	/**
@@ -78,11 +78,10 @@ class conceptoController extends Controller {
 	public function update(request $request)
 	{
 		//
-		$concepto = concepto::find($request->id); 
-		$concepto->tipo = $request->tipo; 
-		$concepto->descripcion = $request->descripcion; 
-		$concepto->save(); 
-		return redirect('concepto'); 
+		$tipo_pregunta = tipo_pregunta::find($request->id); 
+		$tipo_pregunta->tipo_pregunta = $request->tipo_pregunta; 
+		$tipo_pregunta->save(); 
+		return redirect('tipo_pregunta'); 
 	}
 
 	/**
@@ -94,15 +93,15 @@ class conceptoController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		$concepto->delete();
+		$tipo_pregunta = tipo_pregunta::find($id);
+		$tipo_pregunta->delete();
 		return redirect()->back();    
 
 	}
 	public function search (Request $request)
 	{
-		$conceptos = concepto::where('tipo','like','%'. $request->tipo.'%')->get();
-		return \View::make('concepto/concepto_list', compact('conceptos'));
+		$tipo_preguntas = tipo_pregunta::where('tipo_pregunta','like','%'. $request->tipo_pregunta.'%')->get();
+		return \View::make('tipo_pregunta/tipo_pregunta_list', compact('tipo_preguntas'));
 	}
 
 }

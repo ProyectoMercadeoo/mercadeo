@@ -4,9 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\concepto as concepto;
 
-class conceptoController extends Controller {
+class dofaController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +15,6 @@ class conceptoController extends Controller {
 	public function index()
 	{
 		//
-		$conceptos = concepto::all();
-		return \View::make('concepto/concepto_list',compact('conceptos')); 
 	}
 
 	/**
@@ -28,8 +25,6 @@ class conceptoController extends Controller {
 	public function create()
 	{
 		//
-		return \View::make('concepto/concepto_new');
-
 	}
 
 	/**
@@ -37,12 +32,9 @@ class conceptoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(request $request)
+	public function store()
 	{
 		//
-		$concepto = new concepto; 
-		$concepto->create($request->all());
-		return redirect ('concepto');
 	}
 
 	/**
@@ -65,8 +57,6 @@ class conceptoController extends Controller {
 	public function edit($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		return \View::make('concepto/concepto_update',compact ('concepto'));
 	}
 
 	/**
@@ -75,14 +65,9 @@ class conceptoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(request $request)
+	public function update($id)
 	{
 		//
-		$concepto = concepto::find($request->id); 
-		$concepto->tipo = $request->tipo; 
-		$concepto->descripcion = $request->descripcion; 
-		$concepto->save(); 
-		return redirect('concepto'); 
 	}
 
 	/**
@@ -94,15 +79,6 @@ class conceptoController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$concepto = concepto::find($id);
-		$concepto->delete();
-		return redirect()->back();    
-
-	}
-	public function search (Request $request)
-	{
-		$conceptos = concepto::where('tipo','like','%'. $request->tipo.'%')->get();
-		return \View::make('concepto/concepto_list', compact('conceptos'));
 	}
 
 }
